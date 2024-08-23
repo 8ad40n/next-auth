@@ -8,7 +8,8 @@ export default function SignUp() {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
+    const newUser = {email, password};
+    console.log(newUser);
   };
 
   return (
