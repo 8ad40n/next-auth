@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  text-align: center;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
