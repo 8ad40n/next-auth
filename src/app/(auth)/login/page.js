@@ -1,7 +1,9 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { signIn } from "next-auth/react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
+
 
 export default function Login() {
   const handleLogin = (e) => {
@@ -9,6 +11,13 @@ export default function Login() {
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(email, password);
+
+    const res = signIn("credentials",{
+      email,
+      password,
+      redirect: false,
+    });
+    console.log(res);
   };
 
   return (

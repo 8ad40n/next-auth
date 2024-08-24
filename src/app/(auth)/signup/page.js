@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 
 export default function SignUp() {
@@ -10,6 +11,18 @@ export default function SignUp() {
     const password = e.target.password.value;
     const newUser = {email, password};
     console.log(newUser);
+
+    axios.post("http://localhost:3000/signup/api", newUser)
+    .then(res =>{
+      console.log("User created Successfully!", res.data);
+      if(res.data.data.insertedId)
+      {
+        e.target.reset();
+      }
+    })
+    .catch(err => {
+      console.error("Error creating user!", err);
+    });
   };
 
   return (
