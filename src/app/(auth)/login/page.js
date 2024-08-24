@@ -2,22 +2,29 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 
 
 export default function Login() {
-  const handleLogin = (e) => {
+
+  const router = useRouter();
+
+  const handleLogin = async(e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(email, password);
 
-    const res = signIn("credentials",{
+    const res = await signIn("credentials",{
       email,
       password,
       redirect: false,
     });
-    console.log(res);
+    if(res.status == 200)
+    {
+      router.push("/");
+    }
   };
 
   return (
