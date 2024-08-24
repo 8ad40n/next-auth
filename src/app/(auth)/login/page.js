@@ -27,6 +27,10 @@ export default function Login() {
     }
   };
 
+  const handleSocial = async(provider)=>{
+    const res = await signIn(provider);
+  }
+
   return (
     <div className="">
       <form onSubmit={handleLogin} className="mt-20">
@@ -47,13 +51,13 @@ export default function Login() {
       </form>
 
       <div className="flex flex-col gap-2 mt-4">
-        <Button className="w-1/3 mx-auto">
+        <Button onClick={()=> handleSocial("google")} className="w-1/3 mx-auto">
           <div className="flex justify-center items-center gap-2">
             <FaGoogle />
             <p>Login with google</p>
           </div>
         </Button>
-        <Button className="w-1/3 mx-auto">
+        <Button onClick={()=> handleSocial("github")} className="w-1/3 mx-auto">
           <div className="flex justify-center items-center gap-2">
             <FaGithub />
             <p>Login with github</p>
