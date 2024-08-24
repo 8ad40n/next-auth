@@ -1,4 +1,5 @@
 import { connectDB } from "@/lib/connectDB";
+import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
 
 export const POST = async (request) => {
@@ -14,8 +15,9 @@ export const POST = async (request) => {
         { status: 409 }
       );
     }
+    const hash = bcrypt.hashSync(newUser.password, 14);
 
-    const res = await userCollection.insertOne(newUser);
+    const res = await userCollection.insertOne({...newUser, password: hash});
     return NextResponse.json(
       { message: "User created!", data: res },
       { status: 201 }
